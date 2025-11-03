@@ -677,7 +677,7 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        clangd = {},
+        clangd = { cmd = { 'clangd', '--header-insertion=never' } },
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -976,7 +976,12 @@ require('lazy').setup({
     -- tag = "v2.15", -- uncomment to pin to a specific release
     init = function()
       -- VimTeX configuration goes here, e.g.
-      -- vim.g.vimtex_view_method = "SumatraPDF"
+      vim.g.vimtex_compiler_latexmk = {
+        aux_dir = './aux',
+        continuous = 0,
+      }
+      vim.g.vimtex_view_general_viewer = 'C:/Users/User/AppData/Local/SumatraPDF/SumatraPDF.exe'
+      vim.g.vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
     end,
   },
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
